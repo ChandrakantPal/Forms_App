@@ -1,10 +1,11 @@
 import React from 'react';
-import {Paper, Typography} from '@material-ui/core';
+import {Paper, Typography, Avatar} from '@material-ui/core';
 
 const users = (props) => {
     return (
         <div>
         <Paper elevation="5" style={{margin: '20px 8px' , padding: '10px'}}>
+        <Avatar>AB</Avatar>
         <Typography variant="h5">
           {props.title}
         </Typography>
