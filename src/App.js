@@ -8,12 +8,7 @@ class App extends Component {
     return (
       <div>
         <NavBar />
-        <Users title="1001" mail="p.chandrakant@novasemita.org" />
-        <Users title="1001" mail="p.chandrakant@novasemita.org" />
-        <Users title="1001" mail="p.chandrakant@novasemita.org" />
-        <Users title="1001" mail="p.chandrakant@novasemita.org" />
-        <Users title="1001" mail="p.chandrakant@novasemita.org" />
-        <Users title="1001" mail="p.chandrakant@novasemita.org" />
+        <Users />
         {/* <User /> */}
       </div>
     );

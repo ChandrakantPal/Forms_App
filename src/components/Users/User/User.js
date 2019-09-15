@@ -1,15 +1,19 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Paper, Typography, Avatar} from '@material-ui/core';
 
-class User extends Component {
-    render () {
-        return (
-            <div>
-                <h3>User</h3>
-                <p>user@user.com</p>
-                <h1>sites</h1>
-            </div>
-        );
-    }
-}
 
-export default User;
+const user = (props) => (
+    <div>
+        <Paper elevation="5" style={{margin: '20px 8px' , padding: '10px'}}>
+            <Avatar>AB</Avatar>
+            <Typography variant="h5">
+              {props.name}
+            </Typography>
+            <Typography >
+                {props.mail}      
+            </Typography>
+        </Paper>
+    </div> );
+
+
+export default user;

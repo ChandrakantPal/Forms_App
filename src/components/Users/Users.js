@@ -1,20 +1,26 @@
-import React from 'react';
-import {Paper, Typography, Avatar} from '@material-ui/core';
+import React, { Component } from 'react';
+import User from './User/User';
 
-const users = (props) => {
+class Users extends Component {
+  state = {
+    persons: [{id: 'sfgysv', name: 'Max', mail: 'user@user.com' },
+              {id: 'gewygu', name: 'Manu', mail: 'user@user.com' },
+              {id: 'ghfgug', name: 'Stephanie', mail: 'user@user.com' }] 
+  }
+
+
+  render () {
+    const user = this.state.persons.map(person => (
+        <User 
+          key={person.id} 
+          name={person.name} 
+          mail={person.mail} />
+     ));
     return (
-        <div>
-        <Paper elevation="5" style={{margin: '20px 8px' , padding: '10px'}}>
-        <Avatar>AB</Avatar>
-        <Typography variant="h5">
-          {props.title}
-        </Typography>
-        <Typography >
-          {props.mail}
-        </Typography>
-      </Paper>
-        </div>
-    );
+      <div>
+        {user}
+      </div>);
+  }
 }
 
-export default users;
+export default Users;
