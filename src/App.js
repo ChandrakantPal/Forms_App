@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from './components/NavBar/NavBar';
 import Users from './components/Users/Users'
 // import User from './components/User/User';
+import Site from './components/Sites/Site/Site';
 
 class App extends Component {
   render() {
@@ -9,6 +10,7 @@ class App extends Component {
       <div>
         <NavBar />
         <Users />
+        <Site />
         {/* <User /> */}
       </div>
     );
