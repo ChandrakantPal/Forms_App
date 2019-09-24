@@ -1,29 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
+import {Paper, Typography, Avatar, Grid} from '@material-ui/core';
 
-class Site extends Component {
-    state = {
-        forms: [{id: 'sfgysv', form: 'https://docs.google.com/forms/d/e/1FAIpQLSdoe0_npYGuUBFyaRa9MQ7z1pm96IbiSTQmc7Kq9hpYnr7HDw/viewform?usp=send_form' },
-        {id: 'gewygu', form: 'https://docs.google.com/forms/d/e/1FAIpQLSdoe0_npYGuUBFyaRa9MQ7z1pm96IbiSTQmc7Kq9hpYnr7HDw/viewform?usp=send_form' },
-        {id: 'ghfgug', form: 'https://docs.google.com/forms/d/e/1FAIpQLSdoe0_npYGuUBFyaRa9MQ7z1pm96IbiSTQmc7Kq9hpYnr7HDw/viewform?usp=send_form' }]
-    }
+const site = (props) => (
+    <div>
+        <Paper elevation="5" style={{margin: '20px 8px' , padding: '10px'}}>
+            <Grid container xs>
+                <Grid item >
+                    <Avatar>{}</Avatar>
+                </Grid>
+                <Grid item >
+                    <Typography variant="h5" style={{margin: '8px'}}>
+                    {props.siteNumber}
+                    </Typography>
+                </Grid>
+                <Grid item xs={12}>
+                <Typography >
+                    {props.address}      
+                </Typography>
+                </Grid>
+            </Grid> 
+        </Paper>   
+    </div>
+);
 
-    render () {
-        const link = this.state.forms.map(form => (
-            <a key={form.id} href={form.form}>Site From</a>
-        ));
-        return (
-            <div>
-                <h1>title</h1>
-                <p>Some random adrress string</p>
-                <h3>Address</h3>
-                <p>Address</p>   
-                <h3>Contact</h3>
-                <p>1234.....</p>
-                {link}     
-            </div>
-        );
-    
-    }
-}
-
-export default Site;
+export default site;

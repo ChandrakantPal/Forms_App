@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
-import NavBar from './components/NavBar/NavBar';
+import Layout from './components/Layout/Layout';
 import Users from './components/Users/Users'
-// import User from './components/User/User';
-import Site from './components/Sites/Site/Site';
+import Sites from './components/Sites/Sites';
+import { Route, Switch } from 'react-router-dom';
 
 class App extends Component {
   render() {
     return (
       <div>
-        <NavBar />
-        <Users />
-        <Site />
-        {/* <User /> */}
+        <Layout>
+          <Switch>
+            <Route path="/sites" component={Sites} />
+            <Route path="/" component={Users} />
+          </Switch>
+        </Layout>
       </div>
     );
   }

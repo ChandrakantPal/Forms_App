@@ -1,7 +1,7 @@
 import React from 'react';
 import {AppBar, Toolbar, Typography} from '@material-ui/core';
 
-const navBar = () => {
+const navbar = () => {
     return(
         <AppBar color="primary" position="sticky">
           <Toolbar>
@@ -13,4 +13,4 @@ const navBar = () => {
     );
 }
 
-export default navBar;
+export default navbar;
