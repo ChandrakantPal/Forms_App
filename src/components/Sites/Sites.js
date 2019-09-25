@@ -8,9 +8,18 @@ class Sites extends Component {
                   {id: 'ghfgug', site: '1003', address: 'address3', contact: '09876', mail: 'user@user.com' }] 
       }
 
+      siteClickHandler = () => {
+          this.props.history.push("/siteP");
+      }
+
     render () {
             const site = this.state.sites.map(site => (
-                <Site key={site.id} siteNumber={site.site} address={site.address} contact={site.contact} />
+                <Site 
+                    key={site.id} 
+                    siteNumber={site.site} 
+                    address={site.address} 
+                    contact={site.contact} 
+                    clicked={this.siteClickHandler}/>
             ));
         return (
             <div>

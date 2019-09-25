@@ -13,12 +13,12 @@ class Site extends Component {
         ));
         return (
             <div>
-                <h1>{this.props.siteNumber}</h1>
+                <h1>Site number 1001..</h1>
                 <p>Some random adrress string</p>
                 <h3>Address</h3>
-                <p>{this.props.address}</p>   
+                <p>address</p>   
                 <h3>Contact</h3>
-                <p>{this.props.contact}</p>
+                <p>12345.....</p>
                 {link}     
             </div>
         );

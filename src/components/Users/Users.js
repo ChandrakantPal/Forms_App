@@ -8,13 +8,18 @@ class Users extends Component {
               {id: 'ghfgug', name: 'Stephanie', mail: 'user@user.com' }] 
   }
 
+  userClickHandler = () =>{
+    this.props.history.push("/userP");
+  }
+
 
   render () {
     const user = this.state.persons.map(person => (
         <User 
           key={person.id} 
           name={person.name} 
-          mail={person.mail} />
+          mail={person.mail}
+          clicked={this.userClickHandler} />
      ));
     return (
       <div>

@@ -2,17 +2,13 @@ import React from 'react';
 import {BottomNavigation,BottomNavigationAction} from '@material-ui/core';
 import PersonIcon from '@material-ui/icons/Person';
 import ApartmentIcon from '@material-ui/icons/Apartment';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const bottomNav = (props) => (
-    <div>    
+    <div style={{width: '100%', position: 'fixed', bottom: 0}}>    
         <BottomNavigation showLabels>
-            <NavLink to="/" exact>
-                <BottomNavigationAction label="Users" icon={<PersonIcon />} />
-            </NavLink>
-            <NavLink to="/sites">
-                <BottomNavigationAction label="Sites" icon={<ApartmentIcon />} />
-            </NavLink>
+            <BottomNavigationAction component={Link} to="/"  label="Users" icon={<PersonIcon />} />
+            <BottomNavigationAction component={Link} to="/sites" label="Sites" icon={<ApartmentIcon />} />
         </BottomNavigation>
     </div>
 );

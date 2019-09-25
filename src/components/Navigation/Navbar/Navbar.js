@@ -5,8 +5,8 @@ const navbar = () => {
     return(
         <AppBar color="primary" position="sticky">
           <Toolbar>
-            <Typography variant="title" color="inherit">
-              Users
+            <Typography variant="inherit" color="inherit">
+              FORMS
             </Typography>
           </Toolbar>
         </AppBar>
