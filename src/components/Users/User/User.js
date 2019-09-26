@@ -1,11 +1,10 @@
 import React from 'react';
-import {Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
+import {Avatar, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 
 
 const user = (props) => (
-    <div>
-    <List onClick={props.clicked}>
-      <ListItem alignItems="flex-start">
+
+      <ListItem alignItems="flex-start" onClick={props.clicked}>
         <ListItemAvatar>
           <Avatar alt={props.name}></Avatar>
         </ListItemAvatar>
@@ -14,9 +13,7 @@ const user = (props) => (
             secondary={props.mail}>
         </ListItemText>
       </ListItem>
-        <Divider variant="inset" component="li" />
-    </List>
-    </div>
+
 );
 
 

@@ -1,5 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import Site from './Site/Site';
+import { List, Divider } from '@material-ui/core'
 
 class Sites extends Component {
     state = {
@@ -14,17 +15,20 @@ class Sites extends Component {
 
     render () {
             const site = this.state.sites.map(site => (
-                <Site 
-                    key={site.id} 
-                    siteNumber={site.site} 
-                    address={site.address} 
-                    contact={site.contact} 
-                    clicked={this.siteClickHandler}/>
+                <Fragment>
+                    <Site 
+                        key={site.id} 
+                        siteNumber={site.site} 
+                        address={site.address} 
+                        contact={site.contact} 
+                        clicked={this.siteClickHandler}/>
+                    <Divider variant="inset" component="li" />
+                </Fragment>
             ));
         return (
-            <div>
+            <List>
                 {site}
-            </div>
+            </List>
         );
     }
 }
