@@ -1,26 +1,20 @@
 import React from 'react';
-import {Paper, Typography, Avatar, Grid} from '@material-ui/core';
-// import { Link } from 'react-router-dom';
+import {Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 
 const site = (props) => (
     <div>
-        <Paper elevation={5} style={{margin: '20px 8px' , padding: '10px'}} onClick={props.clicked}>
-            <Grid container >
-                <Grid item >
-                    <Avatar>{}</Avatar>
-                </Grid>
-                <Grid item >
-                    <Typography variant="h5" style={{margin: '8px'}}>
-                        {props.siteNumber}
-                    </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography >
-                        {props.address}      
-                    </Typography>
-                </Grid>
-            </Grid> 
-        </Paper>  
+        <List onClick={props.clicked}>
+        <ListItem alignItems="flex-start">
+            <ListItemAvatar>
+                <Avatar alt={props.siteNumber}></Avatar>
+            </ListItemAvatar>
+            <ListItemText primary={
+                <Typography variant="h5">{props.siteNumber}</Typography>}
+                secondary={props.address}>
+            </ListItemText>
+        </ListItem>
+        <Divider variant="inset" component="li" />
+    </List>
     </div>
 );
 

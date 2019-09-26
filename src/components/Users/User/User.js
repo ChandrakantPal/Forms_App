@@ -1,26 +1,21 @@
 import React from 'react';
-import {Paper, Typography, Avatar, Grid} from '@material-ui/core';
+import {Avatar, Divider, List, ListItem, ListItemAvatar, ListItemText, Typography } from '@material-ui/core';
 
 
 const user = (props) => (
     <div>
-        <Paper elevation={5} style={{margin: '20px 8px' , padding: '10px'}} onClick={props.clicked}>
-            <Grid container >
-                <Grid item >
-                    <Avatar>AB</Avatar>
-                </Grid>
-                <Grid item >
-                    <Typography variant="h5" style={{margin: '8px'}}>
-                        {props.name}
-                    </Typography>
-                </Grid>
-                <Grid item xs={12}>
-                    <Typography >
-                            {props.mail}      
-                    </Typography>
-                </Grid>
-            </Grid> 
-        </Paper>    
+    <List onClick={props.clicked}>
+      <ListItem alignItems="flex-start">
+        <ListItemAvatar>
+          <Avatar alt={props.name}></Avatar>
+        </ListItemAvatar>
+        <ListItemText primary={
+            <Typography variant="h5">{props.name}</Typography>}
+            secondary={props.mail}>
+        </ListItemText>
+      </ListItem>
+        <Divider variant="inset" component="li" />
+    </List>
     </div>
 );
 
