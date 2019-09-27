@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Card, CardContent, CardHeader, Typography, Avatar } from '@material-ui/core';
+
 
 class Site extends Component {
     state = {
@@ -9,18 +11,22 @@ class Site extends Component {
 
     render () {
         const link = this.state.forms.map(form => (
-            <a key={form.id} href={form.form}>Site From</a>
+            <a key={form.id} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}>Site From</a>
         ));
         return (
-            <div>
-                <h1>Site number 1001..</h1>
-                <p>Some random adrress string</p>
-                <h3>Address</h3>
-                <p>address</p>   
-                <h3>Contact</h3>
-                <p>12345.....</p>
-                {link}     
-            </div>
+            <Card>
+                <CardContent>
+                    <CardHeader
+                        avatar={<Avatar aria-label="Site">S</Avatar>}
+                        title="Site number 1001.."
+                        subheader="Some random adrress string"/>
+                    <Typography variant="h6">Address</Typography>
+                    <Typography variant="body1">address</Typography>   
+                    <Typography variant="h6">Contact</Typography>
+                    <Typography variant="body1">12345.....</Typography>
+                    {link}  
+                </CardContent>   
+            </Card>
         );
     
     }

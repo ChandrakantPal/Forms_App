@@ -9,7 +9,9 @@ class Layout extends Component {
                 <header>
                     <Navbar />
                 </header>
-                {this.props.children}
+                <main style={{marginTop: '64px', marginBottom: '56px'}}>
+                    {this.props.children}
+                </main>
                 <footer>
                     <BottomNav />
                 </footer>

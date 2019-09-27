@@ -6,6 +6,9 @@ class Users extends Component {
   state = {
     persons: [{id: 'sfgysv', name: 'Max', mail: 'user1@user.com' },
               {id: 'gewygu', name: 'Manu', mail: 'user2@user.com' },
+              {id: '1gewygu', name: 'Sanjay', mail: 'user2@user.com' },
+              {id: '2gewygu', name: 'Chandrakant', mail: 'user2@user.com' },
+              {id: '3gewygu', name: 'User', mail: 'user2@user.com' },
               {id: 'ghfgug', name: 'Stephanie', mail: 'user3@user.com' }] 
   }
 
@@ -16,9 +19,8 @@ class Users extends Component {
 
   render () {
     const user = this.state.persons.map(person => (
-      <Fragment>
+      <Fragment key={person.id} >
         <User 
-          key={person.id} 
           name={person.name} 
           mail={person.mail}
           clicked={this.userClickHandler} />
