@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import User from './User/User';
-import { List, Divider} from '@material-ui/core'
+import { List, Divider} from '@material-ui/core';
 
 class Users extends Component {
   state = {
@@ -14,6 +14,8 @@ class Users extends Component {
 
   userClickHandler = () =>{
     this.props.history.push("/userP");
+    console.log(this.props);
+    
   }
 
 
