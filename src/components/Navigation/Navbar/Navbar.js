@@ -3,7 +3,7 @@ import {AppBar, Toolbar, Typography} from '@material-ui/core';
 
 const navbar = () => {
     return(
-        <AppBar color="primary" position="fixed" style={{top: '0', left: '0'}}>
+        <AppBar color="primary" position="fixed">
           <Toolbar>
             <Typography variant="inherit" color="inherit">
               FORMS
