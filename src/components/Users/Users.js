@@ -1,37 +1,70 @@
 import React, { Component, Fragment } from 'react';
 import User from './User/User';
 import { List, Divider} from '@material-ui/core';
+import firebase from '../../Firebase';
 
 class Users extends Component {
-  state = {
-    persons: [{id: 'sfgysv', name: 'Max', mail: 'user1@user.com' },
-              {id: 'gewygu', name: 'Manu', mail: 'user2@user.com' },
-              {id: '1gewygu', name: 'Sanjay', mail: 'user2@user.com' },
-              {id: '2gewygu', name: 'Chandrakant', mail: 'user2@user.com' },
-              {id: '3gewygu', name: 'User', mail: 'user2@user.com' },
-              {id: 'ghfgug', name: 'Stephanie', mail: 'user3@user.com' }] 
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: []
+    };
   }
 
-  userClickHandler = () =>{
-    this.props.history.push("/userP");
+
+  componentDidMount() {
+    firebase
+    .firestore()
+    .collection('users')
+    .orderBy('user_name')
+    .onSnapshot(querySnapshot => {
+      const users = [];
+      querySnapshot.forEach(doc => {
+        const { user_name , dept } = doc.data();
+        users.push({
+          key: doc.id,
+          doc, // DocumentSnapshot
+          user_name,
+          dept
+        });
+        // console.log('users []' ,  users);
+      });
+
+    this.setState({users: users});
+    console.log('user state',this.state);
+    });
+    // console.log('componentDidMount');
+    // firebase
+    // .firestore()
+    // .collection('notes').get().then(querySnapshot => {
+    //   querySnapshot.docs.forEach(doc => {
+    //     console.log(doc.data());
+        
+    //   })
+    // })
+  }
+
+  userClickHandler = (id) =>{
+    this.props.history.push("/user/" + id );
     console.log(this.props);
     
   }
 
 
   render () {
-    const user = this.state.persons.map(person => (
-      <Fragment key={person.id} >
+    const user = this.state.users.map(person => (
+      <Fragment key={person.key} >
         <User 
-          name={person.name} 
-          mail={person.mail}
-          clicked={this.userClickHandler} />
+          id={person.key}
+          name={person.user_name} 
+          mail={person.dept}
+          clicked={() => this.userClickHandler(person.key)} />
         <Divider variant="inset" component="li" />
       </Fragment>
      ));
     return (
       <List>
-        {user}
+        {user} 
       </List>
       );
   }

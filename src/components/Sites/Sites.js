@@ -1,32 +1,48 @@
 import React, { Component, Fragment } from 'react';
 import Site from './Site/Site';
-import { List, Divider } from '@material-ui/core'
+import { List, Divider } from '@material-ui/core';
+import firebase from '../../Firebase';
 
 class Sites extends Component {
     state = {
-        sites: [{id: 'sfgysv', site: '1001', address: 'address1', contact: '12345', mail: 'user@user.com' },
-                  {id: 'gewygu', site: '1002', address: 'address2', contact: '67890', mail: 'user@user.com' },
-                  {id: 'ghfgug', site: '1003', address: 'address3', contact: '09876', mail: 'user@user.com' },
-                  {id: '1ghfgug', site: '1004', address: 'address4', contact: '09876', mail: 'user@user.com' }, 
-                  {id: '2ghfgug', site: '1005', address: 'address5', contact: '09876', mail: 'user@user.com' },
-                  {id: '3ghfgug', site: '1006', address: 'address6', contact: '09876', mail: 'user@user.com' }, 
-                  {id: '4ghfgug', site: '1007', address: 'address7', contact: '09876', mail: 'user@user.com' }, 
-                  {id: '5ghfgug', site: '1008', address: 'address8', contact: '09876', mail: 'user@user.com' },
-                  {id: '6ghfgug', site: '1009', address: 'address9', contact: '09876', mail: 'user@user.com' }] 
+        sites: [] 
+      }
+      
+      componentDidMount () {
+          firebase
+            .firestore()
+            .collection('sites')
+            .orderBy('site_no')
+            .onSnapshot(querySnapshot => {
+                const sites = [];
+                querySnapshot.forEach(doc => {
+                  const { site_no , site_address } = doc.data();
+                  sites.push({
+                    key: doc.id,
+                    doc, // DocumentSnapshot
+                    site_no,
+                    site_address
+                  });
+                  // console.log('users []' ,  users);
+                });
+          
+              this.setState({sites: sites});
+              console.log('site state',this.state);
+              });
       }
 
-      siteClickHandler = () => {
-          this.props.history.push("/siteP");
+      siteClickHandler = (id) => {
+          this.props.history.push("/site/" + id);
       }
 
     render () {
             const site = this.state.sites.map(site => (
-                <Fragment key={site.id}>
+                <Fragment key={site.key}>
                     <Site 
-                        siteNumber={site.site} 
-                        address={site.address} 
-                        contact={site.contact} 
-                        clicked={this.siteClickHandler}/>
+                        id={site.key}
+                        siteNumber={site.site_no} 
+                        address={site.site_address}  
+                        clicked={() => this.siteClickHandler(site.key)}/>
                     <Divider variant="inset" component="li" />
                 </Fragment>
             ));
