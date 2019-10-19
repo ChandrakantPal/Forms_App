@@ -1,86 +1,40 @@
 import React, { Component } from 'react';
-
-import {withStyles, Grid, Typography, TextField, Button, Divider} from '@material-ui/core';
+import logo from '../../assets/logo.svg';
+import {withStyles, div, Typography, Button} from '@material-ui/core';
 
 
 const styles = {
-    form: {
-        textAlign: 'center'
+    signInContainer: {
+        textAlign: 'center',
+        padding: 'auto'
     },
     pageTitle: {
-        margin: '20px auto'
-    },
-    textField: {
-        margin: '20px',
-        boxSizing: 'border-box'
-    },
-    button: {
-        margin: '20px auto'
-    },
-    divider: {
-        background: '#2A2A28'
+        marginTop: '100px'
     },
     googleBtn: {
-        margin: '40px auto'
+        margin: '40px auto',
+    },
+    logo: {
+        marginRight: '10px',
     }
        
 }
 
 class SignIn extends Component {
-    state = {
-        email: '',
-        password: '',
-        loading: false,
-        errors: {}
-    }
-
-    signInHandler = (e) => {
-        e.preventDefault();
-        console.log('hi');
-        
-    }
-
-    changeHandler = (e) => {
-        this.setState({
-           [e.target.name]: e.target.value 
-        })
-    }
-
     render () {
-        const { classes } = this.props;
+        const { classes} = this.props;
         return (
-            <Grid container className={classes.form} >
-                <Grid item sm />
-                <Grid item sm >
-                    <Typography variant="h2" className={classes.pageTitle} >
-                        SignIn
-                    </Typography>
-                    <form noValidate onSubmit={this.signInHandler}>
-                        <TextField 
-                            id="email" 
-                            name="email" 
-                            type="email" 
-                            label="Email" 
-                            className={classes.textField}
-                            value={this.state.email}
-                            onChange={this.changeHandler}
-                            fullWidth />
-                        <TextField 
-                            id="password" 
-                            name="password" 
-                            type="password" 
-                            label="Password" 
-                            className={classes.textField}
-                            value={this.state.password}
-                            onChange={this.changeHandler}
-                            fullWidth />
-                        <Button type="submit" variant="outlined" colour="primary" className={classes.button}>SignIn</Button>
-                    </form>
-                    <Divider variant="fullWidth" component="hr" className={classes.divider} />
-                    <Button variant="outlined" colour="primary" className={classes.googleBtn}>Sign In With Google</Button>
-                </Grid>
-                <Grid item sm />
-            </Grid>
+            <div className={classes.signInContainer} >
+                    <Typography className={classes.pageTitle} variant="h5">Welcome to Forms App</Typography>
+                    <Button 
+                        size="large"
+                        variant="outlined" 
+                        colour="primary" 
+                        className={classes.googleBtn} 
+                        onClick={this.props.signInWithGoogle}>
+                           <img className={classes.logo} alt="logo" src={logo} /> Sign in with Google
+                    </Button>
+            </div>
         );
     }
 }

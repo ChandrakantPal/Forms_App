@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const bottomNav = (props) => (
     <div style={{width: '100%', position: 'fixed', bottom: 0}}>    
         <BottomNavigation showLabels>
-            <BottomNavigationAction component={Link} to="/"  label="Users" icon={<PersonIcon />} />
+            <BottomNavigationAction component={Link} to="/users"  label="Users" icon={<PersonIcon />} />
             <BottomNavigationAction component={Link} to="/sites" label="Sites" icon={<ApartmentIcon />} />
         </BottomNavigation>
     </div>

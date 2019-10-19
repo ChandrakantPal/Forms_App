@@ -5,26 +5,40 @@ import Sites from './components/Sites/Sites';
 import { Route, Switch } from 'react-router-dom';
 import UserProfile from './components/Users/UserProfile/UserProfile';
 import SiteProfile from './components/Sites/Site/SiteProfile/SiteProfile';
+import withFirebaseAuth from 'react-with-firebase-auth';
+import firebase from './Firebase';
 import SignIn from './components/Auth/SignIn';
-import SignUp from './components/Auth/SignUp';
 
 class App extends Component {
 
   render() {
+    const {
+      user
+    } = this.props;
+    
     return (
       <div>
-        <Layout>
+        <Layout {...this.props}>
+        {user ? 
           <Switch>
             <Route path="/site/:id" component={SiteProfile} /> 
-            <Route path="/user/:id" component={UserProfile} />
             <Route path="/sites" component={Sites} />
-            <Route path="/signin" component={SignIn} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/" exact component={Users} />
-          </Switch>
+            <Route path="/users"><Users {...this.props} /></Route>
+            <Route path="/" exact><UserProfile user={user} /> </Route>
+          </Switch> : <SignIn {...this.props} />
+        }
         </Layout>
       </div>
     );
   }
 }
-export default App;
+const firebaseAppAuth = firebase.auth();
+
+const providers = {
+  googleProvider: new firebase.auth.GoogleAuthProvider(),
+};
+
+export default withFirebaseAuth({
+  providers,
+  firebaseAppAuth,
+})(App);

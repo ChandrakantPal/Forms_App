@@ -7,7 +7,7 @@ class Layout extends Component {
         return(
             <Fragment >
                 <header>
-                    <Navbar />
+                    <Navbar {...this.props} />
                 </header>
                 <main style={{marginTop: '64px', marginBottom: '56px'}}>
                     {this.props.children}

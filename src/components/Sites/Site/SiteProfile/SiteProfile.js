@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardContent, CardHeader, Typography, Avatar } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Typography, Avatar, Grid } from '@material-ui/core';
 import firebase from '../../../../Firebase';
 
 class Site extends Component {
@@ -26,7 +26,10 @@ class Site extends Component {
             <a key={form.id} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}>Site From</a>
         ));
         return (
-            <Card>
+            <Grid container >
+                <Grid item sm/>
+                <Grid item sm>
+                <Card>
                 <CardContent>
                     <CardHeader
                         avatar={<Avatar aria-label="Site">S</Avatar>}
@@ -39,6 +42,9 @@ class Site extends Component {
                     {link}  
                 </CardContent>   
             </Card>
+                </Grid>
+                <Grid item sm/>
+            </Grid>
         );
     
     }
