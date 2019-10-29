@@ -13,14 +13,33 @@ import UserContainer from './containers/UserContainer';
 
 class App extends Component {
 
+  state = {
+    isAdmin: false
+  }
+
+  signInWithGoogleHandler = () => {
+    this.props.signInWithGoogle()
+        .then(res => {
+        if(res.user.uid === "TmfHp4FlWsQb4CndsGQjIPJLQTA3" ) {
+          this.setState({isAdmin: true});
+          console.log('admin');
+          
+        } else {
+          this.setState({isAdmin: false});
+          console.log('user');
+        }
+    }
+    );
+}
+
   render() {
     const {
-      user, uid
+      user
     } = this.props;
     const adminPage = <AdminContainer {...this.props} />
     const userPage = <UserContainer {...this.props} />
     let page;
-    if (uid === "TmfHp4FlWsQb4CndsGQjIPJLQTA3") {
+    if (this.state.isAdmin) {
       page = adminPage;
 
     } else {
@@ -37,7 +56,7 @@ class App extends Component {
             <Route path="/users"><Users {...this.props} /></Route>
             <Route path="/" exact><UserProfile user={user} /> </Route>
           </Switch>  */}
-          {user ? page : <SignIn {...this.props} />}
+          {user ? page : <SignIn auth={this.signInWithGoogleHandler} />}
         {/* </Layout> */}
       </div>
     );

@@ -20,7 +20,7 @@ const styles = {
        
 }
 
-class SignIn extends Component {
+class SignIn extends Component { 
     render () {
         const { classes} = this.props;
         return (
@@ -31,7 +31,7 @@ class SignIn extends Component {
                         variant="outlined" 
                         colour="primary" 
                         className={classes.googleBtn} 
-                        onClick={this.props.signInWithGoogle}>
+                        onClick={this.props.auth}>
                            <img className={classes.logo} alt="logo" src={logo} /> Sign in with Google
                     </Button>
             </div>
