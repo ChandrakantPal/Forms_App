@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Layout from '../components/Layout/Layout';
-// import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import UserProfile from '../components/Users/UserProfile/UserProfile';
 // import SiteProfile from '../components/Sites/Site/SiteProfile/SiteProfile'; 
 
@@ -9,7 +9,7 @@ class UserContainer extends Component {
         const { user } = this.props;
         return (
             <Layout {...this.props}>
-                    <UserProfile user={user} /> 
+                <Route path={`/${user.displayName}`} exact ><UserProfile user={user} /></Route> 
             </Layout>
         );
     }

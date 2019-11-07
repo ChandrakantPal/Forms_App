@@ -14,15 +14,35 @@ import UserContainer from './containers/UserContainer';
 class App extends Component {
 
   state = {
-    isAdmin: false
+    isAdmin: Boolean
   }
 
   signInWithGoogleHandler = () => {
     this.props.signInWithGoogle()
         .then(res => {
+        firebase
+        .firestore()
+        .collection('users').doc(res.user.uid).set({
+          user_name: res.user.displayName
+        },{ merge: true });
+        console.log('user created');
+        
         if(res.user.uid === "TmfHp4FlWsQb4CndsGQjIPJLQTA3" ) {
-          this.setState({isAdmin: true});
-          console.log('admin');
+          firebase
+          .firestore()
+          .collection('users')
+          .doc('TmfHp4FlWsQb4CndsGQjIPJLQTA3').get()
+          .then(querySnapshot => {
+            console.log('firestore',querySnapshot.data());
+            const isAdmin = querySnapshot.data().isAdmin;
+            this.setState({isAdmin: isAdmin});
+            console.log('admin');
+
+          })
+          .catch(error => {
+              console.log("Error getting documents: ", error);
+          });
+          
           
         } else {
           this.setState({isAdmin: false});
@@ -45,7 +65,8 @@ class App extends Component {
     } else {
       page = userPage;
     }
-
+    console.log(this.state);
+    
     return (
       <div>
         {/* <Layout {...this.props}> */}
