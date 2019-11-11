@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
-import { Card, CardContent, CardHeader, Typography, Avatar, Grid } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Typography, Avatar, Grid, Dialog, DialogTitle, DialogContent, TextField, Button } from '@material-ui/core';
+import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+
 import firebase from '../../../../Firebase';
 
 class Site extends Component {
     state = {
-        forms: [{id: 'sfgysv', form: 'https://docs.google.com/forms/d/e/1FAIpQLSdoe0_npYGuUBFyaRa9MQ7z1pm96IbiSTQmc7Kq9hpYnr7HDw/viewform?usp=send_form' },
-        {id: 'gewygu', form: 'https://docs.google.com/forms/d/e/1FAIpQLSdoe0_npYGuUBFyaRa9MQ7z1pm96IbiSTQmc7Kq9hpYnr7HDw/viewform?usp=send_form' },
-        {id: 'ghfgug', form: 'https://docs.google.com/forms/d/e/1FAIpQLSdoe0_npYGuUBFyaRa9MQ7z1pm96IbiSTQmc7Kq9hpYnr7HDw/viewform?usp=send_form' }],
-        site: {}
+        forms: [],
+        site: {},
+        opne: false,
+        newForm: '',
+        newFormNumber: ''
     }
 
     componentDidMount () {
@@ -19,11 +22,30 @@ class Site extends Component {
                 const data = doc.data();
                 this.setState({site: data});
             });
+        firebase
+            .firestore()
+            .collection('sites')
+            .doc(this.props.match.params.id).collection('forms')
+            .onSnapshot(querySnapshot => {
+              const forms = []; 
+              querySnapshot.forEach(doc => {
+              const {form} = doc.data();
+                forms.push({
+                key: doc.id,
+                doc, // DocumentSnapshot
+                form
+              });
+              
+            this.setState({forms: forms});
+              console.log(form); 
+        });
+            })
+
     }
 
     render () {
         const link = this.state.forms.map(form => (
-            <a key={form.id} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}>Site From</a>
+            <a key={form.key} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}>Site From</a>
         ));
         return (
             <Grid container >
@@ -42,12 +64,65 @@ class Site extends Component {
                     {link}  
                 </CardContent>   
             </Card>
+            <AddCircleOutlineOutlinedIcon onClick={this.openDialog} />
+        <Dialog open={this.state.open} onEnter={console.log('Hey.')} onClose={this.closeDialog}>
+          <DialogTitle>ADD Sites</DialogTitle>
+            <DialogContent>
+              <form onSubmit={this.handleSubmit}>
+                <TextField
+                  name="newForm"
+                  type="text"
+                  label="Add Form"
+                  value={this.state.newForm}
+                  onChange={this.handleChange}
+                  fullWidth
+                />
+                <Button
+                  type="submit"
+                  variant="contained"
+                  color="primary"
+                >Add Forms</Button>
+              </form>
+            </DialogContent>
+          </Dialog>
                 </Grid>
                 <Grid item sm/>
             </Grid>
         );
     
     }
+
+    openDialog = () => {
+        this.setState({ open: true });
+    }
+  
+    closeDialog = () => {
+      this.setState({ open: false });
+  
+    }
+  
+    handleChange = (event) => {
+      this.setState({
+        [event.target.name]: event.target.value
+      });
+    }
+
+    handleSubmit = (event) => {
+        event.preventDefault();
+        const forms = {
+            form: this.state.newForm
+        }
+        firebase
+          .firestore()
+          .collection('sites')
+          .doc(this.props.match.params.id).collection('forms')
+          .add(forms).then(res => {
+            console.log(res);
+            this.setState({open: false, newForm: ''});
+          }).catch(err => {
+            console.log(err);
+          })
+      } 
 }
 
 export default Site;

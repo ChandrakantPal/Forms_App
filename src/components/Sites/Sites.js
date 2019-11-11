@@ -35,7 +35,7 @@ class Sites extends Component {
   }
 
   siteClickHandler = (id) => {
-    //   this.props.history.push("/site/" + id);
+    this.props.history.push("/site/" + id);
     console.log(id);
  }
 
