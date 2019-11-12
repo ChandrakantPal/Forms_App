@@ -7,7 +7,7 @@ const site = (props) => {
     return (
         <ListItem alignItems="flex-start" onClick={props.clicked}>
             <ListItemAvatar>
-                <Avatar alt={props.siteNumber}></Avatar>
+                <Avatar alt={props.siteNumber}><span role="img" aria-label="site">🏢</span></Avatar>
             </ListItemAvatar>
             <ListItemText primary={
                 <Typography variant="h5">{props.siteNumber}</Typography>}

@@ -7,7 +7,7 @@ const user = (props) => {
   return (
      <ListItem alignItems="flex-start" onClick={props.clicked}>
         <ListItemAvatar>
-          <Avatar alt={props.name}></Avatar>
+          <Avatar alt={props.name}><span role="img" aria-label="user">😎</span></Avatar>
         </ListItemAvatar>
         <ListItemText primary={
             <Typography variant="h5">{props.name}</Typography>}

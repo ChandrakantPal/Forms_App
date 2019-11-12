@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Card, CardContent, CardHeader, Typography, Avatar, Grid, Dialog, DialogTitle, DialogContent, TextField, Button } from '@material-ui/core';
 import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
 
@@ -48,13 +48,11 @@ class Site extends Component {
             <a key={form.key} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}>Site From</a>
         ));
         return (
-            <Grid container >
-                <Grid item sm/>
-                <Grid item sm>
+                <Fragment>
                 <Card>
                 <CardContent>
                     <CardHeader
-                        avatar={<Avatar aria-label="Site">S</Avatar>}
+                        avatar={<Avatar aria-label="SiteEmoji"><span role="img" aria-label="site">🏢</span></Avatar>}
                         title={this.state.site.site_no}
                         subheader={this.state.site.site_address}/>
                     <Typography variant="h6">Address</Typography>
@@ -85,9 +83,7 @@ class Site extends Component {
               </form>
             </DialogContent>
           </Dialog>
-                </Grid>
-                <Grid item sm/>
-            </Grid>
+          </Fragment>
         );
     
     }
