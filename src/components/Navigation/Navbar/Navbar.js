@@ -4,6 +4,17 @@ import {AppBar, Toolbar, Typography, withStyles,  Button} from '@material-ui/cor
 const styles = {
   appBar: {
     background: '#19A6A6',
+  },
+  appTitle: {
+    display: 'inline-block',
+    position: 'absolute',
+    left: '45%',
+    fontSize: '24px'
+  },
+  signOutBtn: {
+    display: 'inline-block',
+    position: 'absolute',
+    left: '90%'
   }
 }
 
@@ -13,10 +24,10 @@ const navbar = (props) => {
     return(
         <AppBar className={classes.appBar}  position="fixed">
           <Toolbar>
-            <Typography  variant="inherit" color="inherit">
+            <Typography  variant="inherit" color="inherit" className={classes.appTitle}>
               FORMS
             </Typography>
-            {user ? <Button variant="outlined" onClick={signOut}>Sign out</Button> : null}
+            {user ? <Button variant="outlined" onClick={signOut} className={classes.signOutBtn}>Sign out</Button> : null}
           </Toolbar>
         </AppBar>
     );
