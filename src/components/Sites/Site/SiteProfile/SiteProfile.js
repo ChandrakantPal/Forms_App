@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
-import { Card, CardContent, CardHeader, Typography, Avatar, Grid, Dialog, DialogTitle, DialogContent, TextField, Button } from '@material-ui/core';
-import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import { Card, CardContent, CardHeader, Typography, Avatar, Dialog, DialogTitle, DialogContent, TextField, Button } from '@material-ui/core';
+import AddIcon from '@material-ui/icons/Add';
 
 import firebase from '../../../../Firebase';
 
@@ -62,7 +62,7 @@ class Site extends Component {
                     {link}  
                 </CardContent>   
             </Card>
-            <AddCircleOutlineOutlinedIcon onClick={this.openDialog} />
+            <AddIcon onClick={this.openDialog} />
         <Dialog open={this.state.open} onEnter={console.log('Hey.')} onClose={this.closeDialog}>
           <DialogTitle>ADD Sites</DialogTitle>
             <DialogContent>

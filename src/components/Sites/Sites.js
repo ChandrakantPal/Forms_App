@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import Site from './Site/Site';
 import { List, Divider, Dialog, DialogTitle, DialogContent, TextField, Button } from '@material-ui/core';
-import AddCircleOutlineOutlinedIcon from '@material-ui/icons/AddCircleOutlineOutlined';
+import AddIcon from '@material-ui/icons/Add';
 import firebase from '../../Firebase';
 
 class Sites extends Component {
@@ -55,7 +55,7 @@ class Sites extends Component {
         <List>
           {site}
         </List>
-        <AddCircleOutlineOutlinedIcon onClick={this.openDialog} />
+        <AddIcon onClick={this.openDialog} />
         <Dialog open={this.state.open} onEnter={console.log('Hey.')} onClose={this.closeDialog}>
           <DialogTitle>ADD Sites</DialogTitle>
             <DialogContent>

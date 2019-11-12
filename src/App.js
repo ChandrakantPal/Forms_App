@@ -27,7 +27,7 @@ class App extends Component {
         },{ merge: true });
         console.log('user created');
         
-        if(res.user.uid === "TmfHp4FlWsQb4CndsGQjIPJLQTA3" ) {
+        if(res.user.uid === "A5dIX75kfrMBMmqSpeBeUUHNcg13" ) {
           firebase
           .firestore()
           .collection('users')
