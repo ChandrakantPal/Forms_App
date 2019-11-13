@@ -31,7 +31,7 @@ class App extends Component {
           firebase
           .firestore()
           .collection('users')
-          .doc('TmfHp4FlWsQb4CndsGQjIPJLQTA3').get()
+          .doc('A5dIX75kfrMBMmqSpeBeUUHNcg13').get()
           .then(querySnapshot => {
             console.log('firestore',querySnapshot.data());
             const isAdmin = querySnapshot.data().isAdmin;

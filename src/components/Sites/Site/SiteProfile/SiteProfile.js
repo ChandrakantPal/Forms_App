@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Card, CardContent, CardHeader, Typography, Avatar, Dialog, DialogTitle, DialogContent, TextField, Button } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Typography, Avatar, Dialog, DialogTitle, DialogContent, TextField, Button, Link } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
 import firebase from '../../../../Firebase';
@@ -45,7 +45,7 @@ class Site extends Component {
 
     render () {
         const link = this.state.forms.map(form => (
-            <a key={form.key} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}>Site From</a>
+            <Link key={form.key} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}><span role="img" aria-label="memo">📝Site From</span></Link>
         ));
         return (
                 <Fragment>
