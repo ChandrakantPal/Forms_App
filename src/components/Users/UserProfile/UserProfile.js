@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import { Card, CardContent, CardHeader, Typography, Button, withStyles, Grid } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Typography, Button, withStyles } from '@material-ui/core';
 // import firebase from '../../../Firebase';
 
 const styles ={
     cardContent: {
-        padding: 'auto'
+        padding: 'auto',
+        textAlign: 'center'
     },
     profile_pic: {
+        width: '200px',
+        height: '200px',
         borderRadius: '999px', 
         borderStyle: '1px'
     }
@@ -32,10 +35,6 @@ class UserProfile extends Component {
         console.log(this.props);
         const {classes, user} = this.props;
         return (
-            <Grid container >
-                <Grid item sm/>
-                <Grid item sm>
-
             <Card>
                 <CardContent  className={classes.cardContent}>
                     <CardHeader 
@@ -48,9 +47,6 @@ class UserProfile extends Component {
                     <Button size="medium" color="primary">Forms</Button>
                 </CardContent>
             </Card>
-                </Grid>
-                <Grid item sm/>
-            </Grid>
         );
     }
 }
