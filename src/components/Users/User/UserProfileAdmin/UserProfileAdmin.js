@@ -2,51 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { Card, CardContent, CardHeader, Typography, Avatar, Dialog, DialogTitle, DialogContent, TextField, Button, Link } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 
-import firebase from '../../../../Firebase';
 
-class Site extends Component {
-    state = {
-        forms: [],
-        site: {},
-        opne: false,
-        newForm: '',
-        newFormNumber: ''
-    }
-
-    componentDidMount () {
-        firebase
-            .firestore()
-            .collection('sites')
-            .doc(this.props.match.params.id).get().then(doc => {
-                console.log(doc.data());
-                const data = doc.data();
-                this.setState({site: data});
-            });
-        firebase
-            .firestore()
-            .collection('sites')
-            .doc(this.props.match.params.id).collection('forms')
-            .onSnapshot(querySnapshot => {
-              const forms = []; 
-              querySnapshot.forEach(doc => {
-              const {form} = doc.data();
-                forms.push({
-                key: doc.id,
-                doc, // DocumentSnapshot
-                form
-              });
-              
-            this.setState({forms: forms});
-              console.log(form); 
-        });
-            })
-
-    }
+class UserProfileAdmin extends Component {
 
     render () {
-        const link = this.state.forms.map(form => (
-            <Link key={form.key} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}><span role="img" aria-label="memo">📝Site From</span></Link>
-        ));
         return (
                 <Fragment>
                 <Card>
@@ -59,7 +18,7 @@ class Site extends Component {
                     <Typography variant="body1">{this.state.site.site_address}</Typography>   
                     <Typography variant="h6">Contact</Typography>
                     <Typography variant="body1">12345.....</Typography>
-                    {link}  
+                     
                 </CardContent>   
             </Card>
             <AddIcon onClick={this.openDialog} />
@@ -105,20 +64,8 @@ class Site extends Component {
 
     handleSubmit = (event) => {
         event.preventDefault();
-        const forms = {
-            form: this.state.newForm
-        }
-        firebase
-          .firestore()
-          .collection('sites')
-          .doc(this.props.match.params.id).collection('forms')
-          .add(forms).then(res => {
-            console.log(res);
-            this.setState({open: false, newForm: ''});
-          }).catch(err => {
-            console.log(err);
-          })
+       
       } 
 }
 
-export default Site;
+export default UserProfileAdmin;

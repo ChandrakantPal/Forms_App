@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 // import { Route, Switch } from 'react-router-dom';
 // import UserProfile from './components/Users/UserProfile/UserProfile';
 // import SiteProfile from './components/Sites/Site/SiteProfile/SiteProfile';
+import './App.css';
 import withFirebaseAuth from 'react-with-firebase-auth';
 import firebase from './Firebase';
 import SignIn from './components/Auth/SignIn';
@@ -14,22 +15,21 @@ import UserContainer from './containers/UserContainer';
 class App extends Component {
 
   state = {
-    isAdmin: Boolean
+    isAdmin: Boolean,
+    loading: false
   }
 
   signInWithGoogleHandler = () => {
     this.props.signInWithGoogle()
         .then(res => {
-        firebase
-        .firestore()
+        db
         .collection('users').doc(res.user.uid).set({
           user_name: res.user.displayName
         },{ merge: true });
         console.log('user created');
-        
+
         if(res.user.uid === "A5dIX75kfrMBMmqSpeBeUUHNcg13" ) {
-          firebase
-          .firestore()
+          db
           .collection('users')
           .doc('A5dIX75kfrMBMmqSpeBeUUHNcg13').get()
           .then(querySnapshot => {
@@ -50,7 +50,7 @@ class App extends Component {
         }
     }
     );
-}
+  }
 
   render() {
     const {
@@ -79,11 +79,14 @@ class App extends Component {
           </Switch>  */}
           {user ? page : <SignIn auth={this.signInWithGoogleHandler} />}
         {/* </Layout> */}
+        {/* {this.state.loading ? <div className="loader">Loading...</div>: null} */}
       </div>
     );
   }
 }
 const firebaseAppAuth = firebase.auth();
+
+const db = firebase.firestore();
 
 const providers = {
   googleProvider: new firebase.auth.GoogleAuthProvider(),
