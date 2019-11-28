@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Site from './Site/Site';
-import { List, Divider, Dialog, DialogTitle, DialogContent, TextField, Button } from '@material-ui/core';
+import { List, Divider, Dialog, DialogTitle, DialogContent, TextField, Button, Fab } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import firebase from '../../Firebase';
 
@@ -55,7 +55,9 @@ class Sites extends Component {
         <List>
           {site}
         </List>
-        <AddIcon onClick={this.openDialog} />
+        <Fab aria-label="add" onClick={this.openDialog} style={{position: 'fixed', bottom: '56px',right: '0', zIndex: '2',background: '#054e45e6', color: 'white'}}>
+          <AddIcon/>
+        </Fab>
         <Dialog open={this.state.open} onEnter={console.log('Hey.')} onClose={this.closeDialog}>
           <DialogTitle>ADD Sites</DialogTitle>
             <DialogContent>

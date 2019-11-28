@@ -45,8 +45,8 @@ class Users extends Component {
   }
 
   userClickHandler = (id) =>{
-    this.props.history.push("/user/" + id );
-    console.log(this.props);
+    // this.props.history.push("/user/" + id );
+    console.log(this.state);
     
   }
 

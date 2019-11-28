@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-// import Layout from './components/Layout/Layout';
-// import Users from './components/Users/Users'
-// import Sites from './components/Sites/Sites';
-// import { Route, Switch } from 'react-router-dom';
-// import UserProfile from './components/Users/UserProfile/UserProfile';
-// import SiteProfile from './components/Sites/Site/SiteProfile/SiteProfile';
+import Layout from './components/Layout/Layout';
+import Users from './components/Users/Users'
+import Sites from './components/Sites/Sites';
+import { Route, Switch } from 'react-router-dom';
+import UserProfile from './components/Users/UserProfile/UserProfile';
+import SiteProfile from './components/Sites/Site/SiteProfile/SiteProfile';
+import UserProfileAdmin from './components/Users/User/UserProfileAdmin/UserProfileAdmin';
 import './App.css';
 import withFirebaseAuth from 'react-with-firebase-auth';
 import firebase from './Firebase';
@@ -31,7 +32,7 @@ class App extends Component {
         if(res.user.uid === "A5dIX75kfrMBMmqSpeBeUUHNcg13" ) {
           db
           .collection('users')
-          .doc('A5dIX75kfrMBMmqSpeBeUUHNcg13').get()
+          .doc(res.user.uid).get()
           .then(querySnapshot => {
             console.log('firestore',querySnapshot.data());
             const isAdmin = querySnapshot.data().isAdmin;
@@ -44,7 +45,7 @@ class App extends Component {
           });
           
           
-        } else {
+        }  else {
           this.setState({isAdmin: false});
           console.log('user');
         }
@@ -72,9 +73,10 @@ class App extends Component {
         {/* <Layout {...this.props}> */}
         
           {/* <Switch>
+            <Route path="/user/:id" component={UserProfileAdmin} /> 
             <Route path="/site/:id" component={SiteProfile} /> 
             <Route path="/sites" component={Sites} />
-            <Route path="/users"><Users {...this.props} /></Route>
+            <Route path="/" exact><Users {...this.props} /></Route>
             <Route path="/" exact><UserProfile user={user} /> </Route>
           </Switch>  */}
           {user ? page : <SignIn auth={this.signInWithGoogleHandler} />}
