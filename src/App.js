@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import Layout from './components/Layout/Layout';
-import Users from './components/Users/Users'
-import Sites from './components/Sites/Sites';
-import { Route, Switch } from 'react-router-dom';
-import UserProfile from './components/Users/UserProfile/UserProfile';
-import SiteProfile from './components/Sites/Site/SiteProfile/SiteProfile';
-import UserProfileAdmin from './components/Users/User/UserProfileAdmin/UserProfileAdmin';
+// import Layout from './components/Layout/Layout';
+// import Users from './components/Users/Users'
+// import Sites from './components/Sites/Sites';
+// import { Route, Switch } from 'react-router-dom';
+// import UserProfile from './components/Users/UserProfile/UserProfile';
+// import SiteProfile from './components/Sites/Site/SiteProfile/SiteProfile';
+// import UserProfileAdmin from './components/Users/User/UserProfileAdmin/UserProfileAdmin';
 import './App.css';
 import withFirebaseAuth from 'react-with-firebase-auth';
 import firebase from './Firebase';

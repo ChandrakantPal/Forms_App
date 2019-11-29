@@ -109,7 +109,9 @@ class Sites extends Component {
     event.preventDefault();
     const siteData = {
       site_no: this.state.siteNumber,
-      site_address: this.state.siteAddress
+      site_address: this.state.siteAddress,
+      user_id: [],
+      user_name: []
     }
     firebase
       .firestore()

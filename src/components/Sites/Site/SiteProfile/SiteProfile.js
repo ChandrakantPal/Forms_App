@@ -24,9 +24,12 @@ class Site extends Component {
       //getting the site data
       doc_ref
       .onSnapshot(querySnapshot => {
+        console.log('site query', querySnapshot);
         const data = querySnapshot.data();
         this.setState({site: data});
-      });
+        console.log(this.state);
+        
+      })
 
       // getting the forms data
       doc_ref
@@ -58,6 +61,8 @@ class Site extends Component {
           this.setState({engineers: engineers, loading: false}); 
         })
       });
+      
+
 
     }
 
@@ -180,17 +185,18 @@ class Site extends Component {
   //adding users to site
   addEngineerHandler = (event) => {
     event.preventDefault();
+    // const {site_no, site_address } = this.state.site;
     const {userId, user_name} = this.state.select_engineer;
     const data = {
-      user_id: userId,
-      user_name: user_name,
-      site_id: this.props.match.params.id,
-      forms: this.state.forms
+      user_id: firebase.firestore.FieldValue.arrayUnion(userId),
+      user_name: firebase.firestore.FieldValue.arrayUnion(user_name),
+      // site_id: this.props.match.params.id,
+      // forms: this.state.forms
     }
     firebase
     .firestore()
-    .collection('engineers').doc(this.props.match.params.id)
-    .add(data)
+    .collection('sites').doc(this.props.match.params.id)
+    .update(data)
     .then(res=>{
       console.log(res);
       this.setState({openEngineer: false, select_engineer: {}});

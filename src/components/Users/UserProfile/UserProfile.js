@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Card, CardContent, CardHeader, Typography, Button, withStyles, Chip , Link} from '@material-ui/core';
+import { Card, CardContent, CardHeader, Typography, Button, withStyles, Chip ,} from '@material-ui/core';
 import firebase from '../../../Firebase';
 
 const styles ={
@@ -17,32 +17,36 @@ const styles ={
 
 class UserProfile extends Component {
     state = {
-        forms: [],
+        sites: [],
     }
 
     componentDidMount () {
         firebase
         .firestore()
-        .collection('engineers')
-        .where("user_id", ">=", `${this.props.user.uid}`)
+        .collection('sites')
+        .where("user_id", "array-contains", `${this.props.user.uid}`)
         .onSnapshot(queryOnSnapshot => {
-            const form = []; 
+            console.log(queryOnSnapshot);
+            const sites = [];
             queryOnSnapshot.forEach(doc => {
-                console.log(doc.data());
-                const {forms} = doc.data();
-                form.push({
-                  key: doc.id,
-                  forms
-                });
-              this.setState({forms: form}); 
+               const { site_no, site_address } = doc.data()
+               sites.push({site_no: site_no, site_address: site_address, site_id: doc.id});
+               this.setState({sites: sites});
+               console.log(this.state)
             })
+        
         })
 
     }
 
     render () {
-        const link = this.state.forms.map(form => (
-            <Link key={form.key} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}><span role="img" aria-label="memo">📝Site From</span></Link>
+        const site = this.state.sites.map((site, i )=> (
+            <Chip      key={i} 
+                        // icon={<FaceIcon />}
+                        label={`Site ${site.site_no}`}
+                        // onClick={() => this.handleClick(site.site_id)}
+                        // onDelete={handleDelete}
+                    />
         ));
         console.log(this.props);
         const {classes, user} = this.props;
@@ -55,15 +59,17 @@ class UserProfile extends Component {
                     />
                     <img className={classes.profile_pic} src={user.photoURL} alt="profile"/>
                     <Typography variant="h6">{user.displayName}</Typography>
-                    <Button size="medium" color="primary">Site</Button>
-                    <Button size="medium" color="primary">Forms</Button>
-                    <Chip
+                    {/* <Button size="medium" color="primary">Site</Button>
+                    <Button size="medium" color="primary">Forms</Button> */}
+                    {/* <Chip
                         // icon={<FaceIcon />}
                         label="Clickable deletable"
                         // onClick={handleClick}
                         // onDelete={handleDelete}
-                    />
-                    {link}
+                    /> */}
+                    {/* {link} */}
+                    <Typography variant="h6">Site Assignied</Typography>
+                    {site}
                 </CardContent>
             </Card>
         );
