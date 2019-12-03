@@ -110,6 +110,7 @@ class Sites extends Component {
     const siteData = {
       site_no: this.state.siteNumber,
       site_address: this.state.siteAddress,
+      forms: [],
       user_id: [],
       user_name: []
     }

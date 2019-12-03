@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { Card, CardContent, CardHeader, Typography, Avatar, Dialog, DialogTitle, DialogContent, TextField, Button, Link, Fab, Select, MenuItem } from '@material-ui/core';
+import { Card, CardContent, CardHeader, Typography, Avatar, Dialog, DialogTitle, DialogContent, TextField, Button, Link, Fab, Select, MenuItem, Chip } from '@material-ui/core';
 import AddIcon from '@material-ui/icons/Add';
 import Loader from '../../../Loader/Loader';
 
@@ -7,6 +7,7 @@ import firebase from '../../../../Firebase';
  
 class Site extends Component {
     state = {
+        users: [],
         forms: [],
         site: {},
         open: false,
@@ -25,26 +26,26 @@ class Site extends Component {
       doc_ref
       .onSnapshot(querySnapshot => {
         console.log('site query', querySnapshot);
-        const data = querySnapshot.data();
-        this.setState({site: data});
+        const {site_no, site_address, user_name, forms} = querySnapshot.data();
+        this.setState({site: {site_no, site_address},users: user_name, forms: forms});
         console.log(this.state);
         
       })
 
       // getting the forms data
-      doc_ref
-      .collection('forms')
-      .onSnapshot(querySnapshot => {
-        const forms = []; 
-        querySnapshot.forEach(doc => {
-          const {form} = doc.data();
-          forms.push({
-            key: doc.id,
-            form
-          });
-        this.setState({forms: forms}); 
-        });
-      });
+      // doc_ref
+      // .collection('forms')
+      // .onSnapshot(querySnapshot => {
+      //   const forms = []; 
+      //   querySnapshot.forEach(doc => {
+      //     const {form} = doc.data();
+      //     forms.push({
+      //       key: doc.id,
+      //       form
+      //     });
+      //   this.setState({forms: forms}); 
+      //   });
+      // });
 
       //getting the engineers data
       firebase
@@ -67,15 +68,21 @@ class Site extends Component {
     }
 
     render () {
-        const link = this.state.forms.map(form => (
-            <Link key={form.key} href={form.form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}><span role="img" aria-label="memo">📝Site From</span></Link>
+        const link = this.state.forms.map((form, i) => (
+            <Link key={i} href={form} style={{margin: '10px 0px' ,display: 'flex', flexDirection: 'column'}}><span role="img" aria-label="memo">📝Site From</span></Link>
         ));
         const select_engineeres = this.state.engineers.map(engineer => {
           const {userId, user_name} = engineer;
           return (
             <MenuItem key={userId} value={engineer}>{user_name}</MenuItem>
           )
-        })
+        });
+        const user = this.state.users.map((user, i )=> (
+          <Chip      key={i} 
+                      label={user}
+   
+                  />
+      ));
         return ( this.state.loading ? <Loader /> :
                 <Fragment>
                 <Card>
@@ -89,7 +96,7 @@ class Site extends Component {
                     <Typography variant="h6">Contact</Typography>
                     <Typography variant="body1">12345.....</Typography>
                     <Typography variant="h6">Engineers at Site</Typography>
-                    
+                    {user}
                     {link} 
                     <Fab variant="extended" onClick={this.openEngineerDialog}>Add Engineers</Fab>
                     <Dialog open={this.state.openEngineer} onEnter={console.log('Hey Engineers.')} onClose={this.closeDialog}>
@@ -159,14 +166,15 @@ class Site extends Component {
     //adding forms to db
     handleSubmit = (event) => {
         event.preventDefault();
-        const forms = {
-            form: this.state.newForm
+        const form_link =  this.state.newForm;
+        const data = {
+            forms: firebase.firestore.FieldValue.arrayUnion(form_link)
         }
         firebase
           .firestore()
           .collection('sites')
-          .doc(this.props.match.params.id).collection('forms')
-          .add(forms).then(res => {
+          .doc(this.props.match.params.id)
+          .update(data).then(res => {
             console.log(res);
             this.setState({open: false, newForm: ''});
           }).catch(err => {

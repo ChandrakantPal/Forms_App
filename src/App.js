@@ -16,7 +16,7 @@ import UserContainer from './containers/UserContainer';
 class App extends Component {
 
   state = {
-    isAdmin: Boolean,
+    isAdmin: false,
     loading: false
   }
 
@@ -52,6 +52,7 @@ class App extends Component {
     }
     );
   }
+
 
   render() {
     const {
